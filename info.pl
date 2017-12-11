@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use Redis;
 print "Content-Type: text/html\n\n";
 if($ENV{'QUERY_STRING'} eq "") {
    print "<h1>Elige entre los siguientes nombres</h1>
@@ -22,3 +23,7 @@ else {
    $arGet[1]=~ s/%2F/\//g;
    print "$arGet[1] FELICIDADES";
 }
+$redis = Redis->new;
+$redis->rpush("Trabajadores","$arGet[1]");
+}
+
